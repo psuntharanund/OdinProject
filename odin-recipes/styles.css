@@ -1,0 +1,50 @@
+/* styles.css */
+.box-one,
+.box-two{
+    padding: 0;
+    margin: 0;
+    font-size: 40px;
+}
+
+.box-one {
+    background-color: #eb5757;
+    border: 20px solid #9b51e0;
+    padding: 10px;
+    margin: 60px;
+    height: 100px;
+    width: auto;
+}
+.box-two {
+    background-color: #2d9cdb;
+    border: 0 solid #27ae60;
+    padding: 10px;
+    margin: 60px;
+    height: 100px;
+    width: auto;
+}
+
+.headings{
+    text-align: center;
+    background-color:aquamarine;
+    color:black;
+    font-size: 18px;
+}
+
+.lister {
+    display: grid;
+    place-items: center;
+    
+    /* Styling */
+    background-color: #2d9cdb;
+    padding: 2rem;
+    text-align: left;                   /* align text for bullets */
+    list-style: disc;
+    list-style-position: inside;        /* keep bullets in line */
+  }
+  
+
+.photos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
