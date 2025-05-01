@@ -1,5 +1,8 @@
 function startGame(){
     startButton.disabled = true;
+    rockButton.disabled = false;
+    paperButton.disabled = false;
+    scissorsButton.disabled = false;
     console.log(cpuChoiceNum);
     if (cpuChoiceNum === 1) {
         cpuChoiceStr = "Rock";
@@ -13,8 +16,22 @@ function startGame(){
     }
 }
 
+function rockSelect(){
+    userGuess = rockButton.textContent;
+    checkGuess(userGuess);
+}
+
+function paperSelect(){
+    userGuess = paperButton.textContent;
+    checkGuess(userGuess);
+}
+
+function scissorsSelect(){
+    userGuess = scissorsButton.textContent;
+    checkGuess(userGuess);
+}
+
 function checkGuess(){
-    let userGuess = String(guessField.value)
     if (userGuess === ""){
         inputs.textContent = "You have not put in an appropriate response. Please try again."
         gameOver();
@@ -22,8 +39,7 @@ function checkGuess(){
     }
     if (userGuess.toLowerCase() === cpuChoiceStr.toLowerCase()){
         playerScore++;
-        gameBestOfFive++;
-        if (playerScore < 3) {
+        if (playerScore < 5) {
             inputs.textContent = "Congratulations, you've guessed correctly! The score is now (Player: " + playerScore + " CPU: " + cpuScore + ")"
         } else {
             inputs.textContent = "Final score: (Player: " + playerScore + " CPU: " + cpuScore + ")"
@@ -31,8 +47,7 @@ function checkGuess(){
         gameOver();
     } else {
         cpuScore++;
-        gameBestOfFive++;
-        if (cpuScore < 3) {
+        if (cpuScore < 5) {
             inputs.textContent = "Sorry, you have lost! The score is now (Player: " + playerScore + " CPU: " + cpuScore + ")"
         } else {
             inputs.textContent = "Final score: (Player: " + playerScore + " CPU: " + cpuScore + ")"
@@ -42,15 +57,16 @@ function checkGuess(){
 }
 
 function gameOver(){
-    guessField.disabled = true;
-    submitButton.disabled = true;
-    if (playerScore === 3 || cpuScore === 3 || gameBestOfFive > 5){
+    if (playerScore === 5 || cpuScore === 5){
         inputs.textContent = "Final score: (Player: " + playerScore + " CPU: " + cpuScore + ")"
         resetButton = document.createElement("button");
         resetButton.textContent = "Reset Game";
         document.body.appendChild(resetButton);
         resetButton.addEventListener("click", resetGame);
     } else {
+        rockButton.disabled = true;
+        paperButton.disabled = true;
+        scissorsButton.disabled = true;
         nextButton = document.createElement("button");
         nextButton.textContent = "Next round";
         document.body.appendChild(nextButton);
@@ -60,34 +76,34 @@ function gameOver(){
 
 function resetGame(){
     startButton.disabled = false;
-    guessField.disabled = false;
-    submitButton.disabled = false;
-    if (gameBestOfFive > 5 || playerScore === 3 || cpuScore === 3){
+    if (playerScore === 5 || cpuScore === 5){
         resetButton.parentNode.removeChild(resetButton);
         inputs.textContent = "";
-        guessField.value = "";
         playerScore = 0;
         cpuScore = 0;
-        gameBestOfFive = 1;
     } else {
         nextButton.parentNode.removeChild(nextButton);
-        guessField.value = "";
     }
     cpuChoiceNum = Math.floor(Math.random() * 3) + 1;
     startGame();
 }
 
 const startButton = document.querySelector("#startButton");
-const submitButton = document.querySelector("#submitButton");
+const rockButton = document.querySelector("#rockButton");
+const paperButton = document.querySelector("#paperButton");
+const scissorsButton = document.querySelector("#scissorsButton");
 const guessField = document.querySelector(".guessField");
-const guessSubmit = document.querySelector(".guessSubmit");
 const inputs = document.querySelector(".inputs");
 let playerScore = 0;
 let cpuScore = 0;
-let gameBestOfFive = 1;
 let cpuChoiceNum = Math.floor(Math.random() * 3) + 1;
 let cpuChoiceStr;
+let userGuess;
 
 startButton.addEventListener("click", startGame);
-submitButton.addEventListener("click", checkGuess);
-
+rockButton.addEventListener("click", rockSelect);
+paperButton.addEventListener("click", paperSelect);
+scissorsButton.addEventListener("click", scissorsSelect);
+rockButton.disabled = true;
+paperButton.disabled = true;
+scissorsButton.disabled = true;
