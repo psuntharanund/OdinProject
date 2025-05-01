@@ -77,8 +77,8 @@ function resetGame(){
     startGame();
 }
 
-const startButton = document.getElementById("startButton");
-const submitButton = document.getElementById("submitButton");
+const startButton = document.querySelector("#startButton");
+const submitButton = document.querySelector("#submitButton");
 const guessField = document.querySelector(".guessField");
 const guessSubmit = document.querySelector(".guessSubmit");
 const inputs = document.querySelector(".inputs");
